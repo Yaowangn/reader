@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/font/iconfont.css">
+    <link rel="stylesheet" href="../Customer/css/index.css">
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/script/vue.js"></script>
+
+    <script>
+        $(function () {
+
+            function returnmain() {
+                headertop();
+            }
+            returnmain();
+            //上下底部导航栏
+            function headertop() {
+                $(window).scroll(function () {
+                    $(".top-nav").hide();
+                    $(".buttom_red").hide();
+                    $("#bottomsun").hide();
+                });
+
+                $(".Middle").click(function () {
+                    $(".top-nav").show();
+                    $(".buttom_red").show();
+                    // $("#bottomsun").show();
+                });
+
+                //点击字体弹出扩展
+                $(".ziti").click(function () {
+                    $("#bottomsun").show();
+                });
+                $(".copy").click(function () {
+                    $("#bottomsun").show();
+                })
+                $("#theme").click(function () {
+                    $("#bottomsun").hide();
+                });
+
+                //改变窗体样式
+                var $ss = $($("#theme").children())
+                var arr = []
+                $ss.each(function (index, item) {
+                    arr.push(item);
+                    $(this).click(function (event) {
+                        event.stopPropagation();
+                    });
+                });
+                // console.log(arr);
+
+                Array.prototype.forEach.call(arr, function (item, index, arr1) {
+                    // console.log(item);
+                    $(arr[1]).click(function () {
+                        $("#fiction_container").css("background-color", "#fff");
+                    });
+                    $(arr[2]).click(function () {
+                        $("#fiction_container").css("background-color", "rgb(245, 244, 204)");
+                    });
+                    $(arr[3]).click(function () {
+                        $("#fiction_container").css("background-color", "rgb(248, 250, 142)");
+                    });
+                    $(arr[4]).click(function () {
+                        $("#fiction_container").css("background-color", "rgb(66, 66, 47)");
+                        $("body").children().text()
+                    });
+                })
+
+            }
+            //改变字体
+            $()
+        })
+    </script>
+</head>
+
+<body>
+    <div class="root" id="container">
+        <div id="top-nav" class="top-nav">
+
+            <div class="icon-back">
+
+                <i class="iconfont icon-fanhui" id="font"></i>
+
+            </div>
+            <div class="nav-title">
+                <span>返回书架</span>
+            </div>
+
+        </div>
+        <div id="fition_chapter_title"></div>
+        <div id="fiction_container" class="model-read-content" :style="{opacity:range/100}">
+
+        </div>
+
+        <div class="Middle"></div>
+        <div class="model-button-bar">
+            <ul class="u-tab">
+                <li id="prev_button">上一章</li>
+                <li id="next_button">下一章</li>
+            </ul>
+        </div>
+        <!--控制面板-->
+        <div id="bottomsun">
+            <!--亮度调节-->
+
+
+
+            <div id="theme">
+
+                <p>主题</p>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+
+                <label for="bri"><i class="iconfont icon-brightness brightness_sun"></i></label>
+                <input id="bri" type="range" v-model="range" />
+
+                <!--文字样式-->
+                <div class="Writtenwords">
+
+                </div>
+            </div>
+        </div>
+        <div class="buttom_red">
+            <div class="buttom_tops">
+
+                <div class="buttoms Catalog">
+
+                    <div class="mont mulu">
+                        <span><i class="iconfont icon-menu menu"></i></span>
+                        <p>目录</p>
+                    </div>
+
+                </div>
+                <div class="buttoms Typeface">
+                    <div class="mont typeface">
+                        <span><i class="iconfont icon-ziti ziti"></i></span>
+                        <p>字体</p>
+                    </div>
+                </div>
+                <div class="buttoms Atnight">
+                    <div class="mont atnight">
+                        <span><i class="iconfont icon-yejian1-copy copy"></i></span>
+                        <p>夜间</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- <script src="./static/script/zepto.js"></script> -->
+    <script>
+        window.jQuery = $;
+    </script>
+    <script src="../static/script/jquery.base64.js"></script>
+    <script src="../static/script/jquery.jsonp.js"></script>
+    <script src="../js/brightness.js"></script>
+    <script src="../js/reader.js"></script>
+
+</body>
+
+</html>

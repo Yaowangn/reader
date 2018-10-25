@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // window.jQuery = $;
+    </script>
+    <script src="../static/script/jquery.base64.js"></script>
+    <script src="../static/script/jquery.jsonp.js"></script>
+    <!-- <script src="../js/brightness.js"></script> -->
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script>
+        (function () {
+            
+            var Ulit = (function () {
+                var prefix = 'html5_reader_';
+                var StorageGetter = function (key) {
+                    return localStorage.setItem(perfix + key);
+                }
+                var StorageSetter = function (key, value) {
+
+                }
+                var getBSONP = function (url, callback) {
+                    return $.jsonp({
+                        url: url,
+                        cache: true,
+                        callback: "duokan_fiction_chapter",
+                        success: function (result) {
+
+                            var data = $.base64.decode(result);
+                            var json = decodeURIComponent(escape(data));
+                            callback(data);
+
+                        }
+                    })
+                }
+                return {
+                    getBSONP: getBSONP,
+                    StorageGetter: StorageGetter,
+                    StorageSetter: StorageSetter
+                }
+            })();
+
+            function main() {
+                //入口函数
+                EventHanlder();
+                var readerModle = ReaderModle();
+                readerModle.init();
+            }
+
+            function ReaderModle() {
+                var Chapter_id;
+                var init = function () {
+                    (function () {
+                        getCurChapterContent(Chapter_id, function () {
+
+                        });
+                    })
+                }
+                return {
+                    init: init
+                }
+                //实现和阅读器相关的的数据交互的方法
+                var getFictionInfo = function (callback) {
+                    $.get("data/chapter",function(callback){
+
+                    },"json")
+                }
+
+                var getCurChapterContent = function (chapter_id,data) {
+                    $.ajax({
+                        type: "GET",
+                        url: "data/chapter.json",
+
+                        success: function (data) {
+                            var url = data.jsonp;
+                            console.log(data);
+                            Ulit.getBSONP(url, function (data) {
+                                callback && callback(data)
+                            });
+
+                        }
+
+                    })
+                }
+
+
+            }
+
+            function ReaderBaseFrame() {
+                //渲染基本的ui结构
+
+            }
+
+            function EventHanlder() {
+                //交互事件绑定
+            }
+            main();
+        })
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
